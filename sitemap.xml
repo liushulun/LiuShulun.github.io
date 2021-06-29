@@ -23,16 +23,16 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/post/android/android-aidl/</loc>
+    <loc>https://blog.luis.ltd/post/android/android-anr/</loc>
     
-    <lastmod>2020-05-03</lastmod>
+    <lastmod>2019-10-07</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/post/android/android-anr/</loc>
+    <loc>https://blog.luis.ltd/post/android/android-aidl/</loc>
     
-    <lastmod>2019-10-07</lastmod>
+    <lastmod>2020-05-03</lastmod>
     
   </url>
   
@@ -86,6 +86,13 @@
   </url>
   
   <url>
+    <loc>https://blog.luis.ltd/post/android/android-looper/</loc>
+    
+    <lastmod>2020-04-26</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.luis.ltd/post/android/android-jar/</loc>
     
     <lastmod>2020-02-10</lastmod>
@@ -96,13 +103,6 @@
     <loc>https://blog.luis.ltd/post/android/android-memory/</loc>
     
     <lastmod>2019-11-04</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.luis.ltd/post/android/android-looper/</loc>
-    
-    <lastmod>2020-04-26</lastmod>
     
   </url>
   
@@ -128,23 +128,16 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/post/android/android-ndk/</loc>
-    
-    <lastmod>2020-02-20</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.luis.ltd/post/android/android-oom/</loc>
-    
-    <lastmod>2019-10-21</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.luis.ltd/post/android/android-proguard/</loc>
     
     <lastmod>2019-07-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.luis.ltd/post/android/android-ndk/</loc>
+    
+    <lastmod>2020-02-20</lastmod>
     
   </url>
   
@@ -159,6 +152,13 @@
     <loc>https://blog.luis.ltd/post/android/android-router/</loc>
     
     <lastmod>2021-02-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.luis.ltd/post/android/android-oom/</loc>
+    
+    <lastmod>2019-10-21</lastmod>
     
   </url>
   
@@ -254,16 +254,16 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/post/java/java-string/</loc>
+    <loc>https://blog.luis.ltd/post/java/java-reflect/</loc>
     
-    <lastmod>2020-08-15</lastmod>
+    <lastmod>2020-08-04</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/post/java/java-reflect/</loc>
+    <loc>https://blog.luis.ltd/post/java/java-string/</loc>
     
-    <lastmod>2020-08-04</lastmod>
+    <lastmod>2020-08-15</lastmod>
     
   </url>
   
@@ -485,14 +485,14 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/about/collections/colections-android.html</loc>
+    <loc>https://blog.luis.ltd/tags/index.html</loc>
     
     <lastmod>2017-12-31</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/tags/index.html</loc>
+    <loc>https://blog.luis.ltd/about/collections/colections-android.html</loc>
     
     <lastmod>2017-12-31</lastmod>
     
@@ -520,13 +520,6 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/about/collections/collections-others.html</loc>
-    
-    <lastmod>2017-12-31</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.luis.ltd/about/collections/index.html</loc>
     
     <lastmod>2017-12-31</lastmod>
@@ -535,6 +528,13 @@
   
   <url>
     <loc>https://blog.luis.ltd/about/exhibits/exhibits-ws_data_analysis.html</loc>
+    
+    <lastmod>2017-12-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.luis.ltd/about/collections/collections-others.html</loc>
     
     <lastmod>2017-12-31</lastmod>
     
@@ -592,14 +592,14 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/tags/AIDL/</loc>
+    <loc>https://blog.luis.ltd/tags/ANR/</loc>
     <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/tags/ANR/</loc>
+    <loc>https://blog.luis.ltd/tags/AIDL/</loc>
     <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -704,6 +704,20 @@
   </url>
   
   <url>
+    <loc>https://blog.luis.ltd/tags/Looper/</loc>
+    <lastmod>2021-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.luis.ltd/tags/%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2021-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.luis.ltd/tags/Jar/</loc>
     <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
@@ -719,20 +733,6 @@
   
   <url>
     <loc>https://blog.luis.ltd/tags/Androi/</loc>
-    <lastmod>2021-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.luis.ltd/tags/Looper/</loc>
-    <lastmod>2021-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.luis.ltd/tags/%E6%BA%90%E7%A0%81/</loc>
     <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -767,6 +767,27 @@
   </url>
   
   <url>
+    <loc>https://blog.luis.ltd/tags/%E5%8F%8D%E7%BC%96%E8%AF%91/</loc>
+    <lastmod>2021-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.luis.ltd/tags/%E6%B7%B7%E6%B7%86/</loc>
+    <lastmod>2021-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.luis.ltd/tags/%E5%8A%A0%E5%9B%BA/</loc>
+    <lastmod>2021-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.luis.ltd/tags/CMake/</loc>
     <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
@@ -795,34 +816,6 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/tags/OOM/</loc>
-    <lastmod>2021-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.luis.ltd/tags/%E5%8F%8D%E7%BC%96%E8%AF%91/</loc>
-    <lastmod>2021-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.luis.ltd/tags/%E6%B7%B7%E6%B7%86/</loc>
-    <lastmod>2021-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.luis.ltd/tags/%E5%8A%A0%E5%9B%BA/</loc>
-    <lastmod>2021-06-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.luis.ltd/tags/Router/</loc>
     <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
@@ -838,6 +831,13 @@
   
   <url>
     <loc>https://blog.luis.ltd/tags/%E8%B7%AF%E7%94%B1/</loc>
+    <lastmod>2021-06-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.luis.ltd/tags/OOM/</loc>
     <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1005,14 +1005,14 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/tags/String/</loc>
+    <loc>https://blog.luis.ltd/tags/%E5%8F%8D%E5%B0%84/</loc>
     <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/tags/%E5%8F%8D%E5%B0%84/</loc>
+    <loc>https://blog.luis.ltd/tags/String/</loc>
     <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
