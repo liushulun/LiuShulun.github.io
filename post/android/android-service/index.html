@@ -80,7 +80,7 @@
       <h1 class="site-title">Luis's Blogs</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">V 1.3.11</p>
+      <p class="site-subtitle" itemprop="description">V 1.3.12</p>
   </div>
 
   <div class="site-nav-right">
@@ -353,14 +353,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Post Symbols:</span>
-      <span>11k</span>
+      <span>12k</span>
     </span>
     <span class="post-meta-item" title="Read Time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Read Time &asymp;</span>
-      <span>12 Min</span>
+      <span>13 Min</span>
     </span>
 </div>
 
@@ -385,7 +385,7 @@
 <ul>
 <li><p>BackGround Service：用户不可感知的后台操作，如监控、轮询拉取等。</p>
 <ul>
-<li>默认情况下，不论通过 <code>start</code> 还是 <code>bind</code> 启动的 Service，都是后台 Service。后台 Service 对用户不可感知，但内存优先级较低，在内存不足时会被系统杀死（根据 Service 的参数可以指定是否需要在内存空闲后重新启动），最大允许 200 秒（<code>ActiveServices#SERVICE_BACKGROUND_TIMEOUT</code>）卡顿时间，超出则会抛出 ANR。</li>
+<li>默认情况下，不论通过 <code>start</code> 还是 <code>bind</code> 启动的 Service 都是后台 Service。后台 Service 对用户不可感知，但内存优先级较低，在内存不足时会被系统杀死（根据 Service 的参数可以指定是否需要在内存空闲后重新启动），最大允许 200 秒（<code>ActiveServices#SERVICE_BACKGROUND_TIMEOUT</code>）卡顿时间，超出则会抛出 ANR。</li>
 </ul>
 </li>
 <li><p>Foreground Service：执行一些用户可感知的操作，如 Audio 播放。</p>
@@ -417,7 +417,11 @@
 <h3 id="2-1-Start方式启动Service"><a href="#2-1-Start方式启动Service" class="headerlink" title="2.1 Start方式启动Service"></a>2.1 Start方式启动Service</h3><p>以 start 方式启动 Service：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(context, DemoService.class);</span><br><span class="line">startService(intent);</span><br><span class="line">stopService(intent);</span><br></pre></td></tr></table></figure>
 
-<p>需要注意，<code>Service#stopSelf()</code> 和 <code>Service#stopSelfResult(int startId)</code> 的效果等同于 <code>Context#stopService(Intent)</code>。</p>
+<p>需要注意：</p>
+<ul>
+<li><code>Service#stopSelf()</code> 和 <code>Service#stopSelfResult(int startId)</code> 的效果等同于 <code>Context#stopService(Intent)</code>。</li>
+<li>仅被 Start 启动而没有被任何 Client Bind 的后台 Service，将在 App 进入后台 1 分钟后被 Kill。</li>
+</ul>
 <h3 id="2-2-Bind方式启动Service"><a href="#2-2-Bind方式启动Service" class="headerlink" title="2.2 Bind方式启动Service"></a>2.2 Bind方式启动Service</h3><p>如果通过 bind 方式绑定 Service，在 Service 中返回 IBinder 类的实例，则 Client 就能通过 Binder 的方式与 Service 通信。</p>
 <blockquote>
 <p>（@注）虽然默认情况下 Service 运行在主进程的主线程当中，但 Service 本身是支持跨进程的，所以 Android 选择了 Binder 作为通信方式。</p>
@@ -469,11 +473,33 @@
 <li>由于指定了启动的是前台服务，因此其会在内部调用 <code>ActiveServices.setServiceForegroundInnerLocked()</code> Post 了一个延时消息，必须在 10s 内调用 <code>Service#startForeground()</code>，其内部 Remove 了该延时消息，否则该延时消息就会抛出 ANR。</li>
 <li>并且如果 <code>Service#startForeground(int id, Notification notification)</code> 中 <code>id == 0</code> 或 <code>notification == null</code> 都会抛出 <code>Null Notification</code> 异常，因此启动前台服务一定会创建一个通知提醒用户。</li>
 </ul>
-<p>（附）启动一个几乎不可见的 Activity：</p>
+<p>（1）API 26 以上 Service 保活</p>
+<p>随着高版本 Android 对后台策略逐步收紧，理论上已经没有 100% 保活的方式，Service 保活的思路主要就是两个 Service 互相启动并绑定；</p>
+<ul>
+<li>AService：<ul>
+<li>首先由某个前台 Activity Start 一个 AService。</li>
+<li>AService 的 <code>onStartCommand()</code> 返回 <code>START_STICKY</code>。</li>
+<li>AService Start 和 Bind BService。</li>
+<li>AService 在 <code>onDestroy()</code> 中再次 Start 和 Bind BService。</li>
+</ul>
+</li>
+<li>BService：<ul>
+<li>BService 的 <code>onStartCommand()</code> 同样返回 <code>START_STICKY</code>。</li>
+<li>BService 被启动后，Start 和 Bind AService。</li>
+<li>BService 在 <code>onDestroy()</code> 中再次 Start 和 Bind AService。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>（@注）AService 和 BService 都需要在 <code>onStartCommand()</code> 中返回 <code>START_STICKY</code>，这样其中一个 Service 由于内存被系统杀死后，仍有机会被重启并继续拉活对方。</p>
+<p>由于后台 Service 如果仅被 Start 而没有被 Bind，会在 App 置入后台 1 分钟后被 Kill，所以 Service 互相拉活时，需要同时 Start 和 Bind 对方。</p>
+<p>由于高版本禁止从后台启动任何后台服务，所以在 AService 和 BService 互相 Start 时需要判断版本，API 26 以上需要 <code>startForegroundService()</code>。</p>
+</blockquote>
+<p>（2）启动一个几乎不可见的 Activity</p>
 <ul>
 <li>在 <code>Activity#onCreate()</code> 中将 Activity 设置为只有一个像素大小的透明的背景。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    Window window = getWindow();</span><br><span class="line">    <span class="comment">// 设置 Window 位于左上角：</span></span><br><span class="line">    window.setGravity(Gravity.TOP | Gravity.LEFT);</span><br><span class="line">    WindowManager.LayoutParams wlp = window.getAttributes();</span><br><span class="line">    <span class="comment">// 设置 Window 相对 Gravity 横纵坐标偏移均为 0：</span></span><br><span class="line">    wlp.x = <span class="number">0</span>;</span><br><span class="line">    wlp.y = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 设置 Window 的宽和高均为 1 像素：</span></span><br><span class="line">    wlp.width = <span class="number">1</span>;</span><br><span class="line">    wlp.height = <span class="number">1</span>;</span><br><span class="line">    window.setAttributes(wlp);</span><br><span class="line">    <span class="comment">// 设置不可点击：</span></span><br><span class="line">    window.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);</span><br><span class="line">    <span class="comment">// 设置不关心外界触摸事件：</span></span><br><span class="line">    window.addFlags(WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    Window activityWindow = getWindow();</span><br><span class="line">    <span class="comment">// 设置 Window 不可点击：</span></span><br><span class="line">    activityWindow.addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);</span><br><span class="line">    <span class="comment">// 设置 Window 不关心外界触摸事件：</span></span><br><span class="line">    activityWindow.addFlags(WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);</span><br><span class="line">    <span class="comment">// 设置 DecorView 为全屏状态</span></span><br><span class="line">    View decorView = activityWindow.getDecorView();</span><br><span class="line">    decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);</span><br><span class="line">    <span class="comment">// 设置状态栏透明不可见：</span></span><br><span class="line">    activityWindow.setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">    <span class="comment">// 设置 Window 位于左上角：</span></span><br><span class="line">    activityWindow.setGravity(Gravity.START | Gravity.TOP);</span><br><span class="line">    WindowManager.LayoutParams params = activityWindow.getAttributes();</span><br><span class="line">    <span class="comment">// 设置 Window 相对 Gravity 横纵坐标偏移均为 0：</span></span><br><span class="line">    params.x = <span class="number">0</span>;</span><br><span class="line">    params.y = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 设置 Window 的宽和高均为 1 像素：</span></span><br><span class="line">    params.height = <span class="number">1</span>;</span><br><span class="line">    params.width = <span class="number">1</span>;</span><br><span class="line">    activityWindow.setAttributes(params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -664,14 +690,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Site Symbols:</span>
-    <span title="Site Symbols">340k</span>
+    <span title="Site Symbols">341k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Site Read Time &asymp;</span>
-    <span title="Site Read Time">6:17</span>
+    <span title="Site Read Time">6:18</span>
   </span>
 </div>
 
