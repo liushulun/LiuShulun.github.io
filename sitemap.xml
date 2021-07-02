@@ -464,20 +464,6 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/404/index.html</loc>
-    
-    <lastmod>2017-12-31</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.luis.ltd/about/index.html</loc>
-    
-    <lastmod>2017-12-31</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.luis.ltd/categories/index.html</loc>
     
     <lastmod>2017-12-31</lastmod>
@@ -485,7 +471,21 @@
   </url>
   
   <url>
+    <loc>https://blog.luis.ltd/404/index.html</loc>
+    
+    <lastmod>2017-12-31</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.luis.ltd/tags/index.html</loc>
+    
+    <lastmod>2017-12-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.luis.ltd/about/index.html</loc>
     
     <lastmod>2017-12-31</lastmod>
     
@@ -534,13 +534,6 @@
   </url>
   
   <url>
-    <loc>https://blog.luis.ltd/about/plans/index.html</loc>
-    
-    <lastmod>2017-12-31</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.luis.ltd/about/exhibits/exhibits-ws_data_analysis.html</loc>
     
     <lastmod>2017-12-31</lastmod>
@@ -549,6 +542,13 @@
   
   <url>
     <loc>https://blog.luis.ltd/about/exhibits/index.html</loc>
+    
+    <lastmod>2017-12-31</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.luis.ltd/about/plans/index.html</loc>
     
     <lastmod>2017-12-31</lastmod>
     
