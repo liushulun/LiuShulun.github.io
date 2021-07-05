@@ -3439,6 +3439,26 @@ code {
   color: #555 !important;
   background: #f0f0f0 !important;
 }
+tbody tr:nth-of-type(odd) {
+  background: var(--custom-color-block-background);
+}
+tbody tr:hover {
+  background: var(--table-row-hover-bg-color);
+}
+th,
+td {
+  border: 1px solid #404040;
+}
+th {
+  font-weight: 900;
+  padding-bottom: 10px;
+  border-width: 2px;
+  color: #303030;
+  background: #808080;
+}
+td {
+  border-bottom-width: 1px;
+}
 .comments {
   background: rgba(255,255,255,0.8);
 }

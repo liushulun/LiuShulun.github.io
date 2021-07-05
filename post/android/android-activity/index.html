@@ -82,7 +82,7 @@
       <h1 class="site-title">Luis's Blogs</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">V 1.3.14</p>
+      <p class="site-subtitle" itemprop="description">V 1.3.20</p>
   </div>
 
   <div class="site-nav-right">
@@ -97,9 +97,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">65</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">68</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">115</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">116</span></a></li>
         
             
   <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-comments fa-fw"></i>About</a></li>
@@ -179,7 +179,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">Posts</span>
         </a>
       </div>
@@ -192,7 +192,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-count">116</span>
         <span class="site-state-item-name">Tags</span></a>
       </div>
   </nav>
@@ -438,17 +438,17 @@
 <tbody><tr>
 <td align="left">/A&gt;</td>
 <td align="left">退出</td>
-<td align="center">Standard Start B</td>
+<td align="center">Start Standard B</td>
 </tr>
 <tr>
 <td align="left">/AB&gt;</td>
 <td align="left">/A&gt;</td>
-<td align="center">Standard Start B</td>
+<td align="center">Start Standard B</td>
 </tr>
 <tr>
 <td align="left">/ABB&gt;</td>
 <td align="left">/AB&gt;</td>
-<td align="center">Standard Start A</td>
+<td align="center">Start Standard A</td>
 </tr>
 <tr>
 <td align="left">/ABBA&gt;</td>
@@ -472,25 +472,25 @@
 <td>1</td>
 <td align="left">/A&gt;</td>
 <td align="left">退出</td>
-<td align="center">SingleTop Start B</td>
+<td align="center">Start SingleTop B</td>
 </tr>
 <tr>
 <td>2</td>
 <td align="left">/AB&gt;</td>
 <td align="left">/A&gt;</td>
-<td align="center">SingleTop Start B</td>
+<td align="center">Start SingleTop B</td>
 </tr>
 <tr>
 <td>3</td>
 <td align="left">/AB&gt;</td>
 <td align="left">/A&gt;</td>
-<td align="center">SingleTop Start A</td>
+<td align="center">Start SingleTop A</td>
 </tr>
 <tr>
 <td>4</td>
 <td align="left">/ABA&gt;</td>
 <td align="left">/AB&gt;</td>
-<td align="center">SingleTop Start B</td>
+<td align="center">Start SingleTop B</td>
 </tr>
 <tr>
 <td>5</td>
@@ -501,6 +501,7 @@
 </tbody></table>
 <p>（2）SingleTop 模式通常用于可能多次弹出的页面。实际上，我认为除非某个 Activity 有明确的需求要打开多个实例，否则都应该使用 SingleTop。因为大多数页面跳转都有可能被误触发多次，但绝大多数情况下都是不希望同时存在多个实例的。</p>
 <h3 id="2-3-SingleTask"><a href="#2-3-SingleTask" class="headerlink" title="2.3 SingleTask"></a>2.3 SingleTask</h3><p>（1）SingleTask 即任务栈唯一模式，启动一个 Activity 时，如果任务栈中存在该 Activity 实例，则复用它，否则才创建一个新的 Activity 实例。SingleTask 和 SingleTop 的区别在于，SingleTop 只在栈顶 Activity 和要启动的 Activity 相同时才复用，而 SingleTask 是每个 Activity 在当前整个任务栈中都只有一个实例。</p>
+<p>此外 SingleTask 还有一个重要特性：当一个 SingleTask 模式 Activity 被从任务栈中间移到栈顶时，会将原本任务栈中位于该 SingleTask Activity 之上的其他 Activity 销毁。需要注意的是，如果新启动一个 SingleTask Activity 并压入任务栈，由于其原本并不在栈中而是直接压入栈顶，因此不会导致栈内其他 Activity 被销毁。</p>
 <p>SingleTask 启动方式任务栈的行为实例如下（其中 <code>/</code> 表示 <strong>栈底</strong>，<code>&gt;</code> 表示 <strong>栈顶</strong>）：</p>
 <table>
 <thead>
@@ -515,34 +516,34 @@
 <td>1</td>
 <td align="left">/A&gt;</td>
 <td align="left">退出</td>
-<td align="center">SingleTask Start B</td>
+<td align="center">Start SingleTask B</td>
 </tr>
 <tr>
 <td>2</td>
 <td align="left">/AB&gt;</td>
 <td align="left">/A&gt;</td>
-<td align="center">SingleTask Start B</td>
+<td align="center">Start SingleTask B</td>
 </tr>
 <tr>
 <td>3</td>
 <td align="left">/AB&gt;</td>
 <td align="left">/A&gt;</td>
-<td align="center">SingleTask Start A</td>
+<td align="center">Start SingleTask A</td>
 </tr>
 <tr>
 <td>4</td>
-<td align="left">/BA&gt;</td>
-<td align="left">/B&gt;</td>
-<td align="center">Standard Start B</td>
+<td align="left">/A&gt;</td>
+<td align="left">退出</td>
+<td align="center">Start Standard B</td>
 </tr>
 <tr>
 <td>5</td>
-<td align="left">/BAB&gt;</td>
-<td align="left">/BA&gt;</td>
+<td align="left">/AB&gt;</td>
+<td align="left">/A&gt;</td>
 <td align="center">-</td>
 </tr>
 </tbody></table>
-<p>（2）SingleTask 模式常用在 App 的 MainActivity 中，因为大多数情况下 App 在主页面上返回时都应该返回到桌面或退出，而不是返回到其他页面中。</p>
+<p>（2）SingleTask 模式常用在 App 的 MainActivity 中，因为大多数情况下 App 在主页面上返回时都应该返回到桌面或退出，而不是返回到其他页面中，因此可以在将 MainActivity 移入栈顶时，直接销毁其他 Activity。</p>
 <h3 id="2-4-SingleInstance"><a href="#2-4-SingleInstance" class="headerlink" title="2.4 SingleInstance"></a>2.4 SingleInstance</h3><p>（1）SingleInstance 即唯一实例模式，启动一个 Activity 时，寻找所有的任务栈，如果某个任务栈中存在该 Activity 实例，则切换到该任务栈，否则新建一个任务栈并创建该 Activity 实例。</p>
 <p>假如有三个 Activity 按照以下关系启动：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A(Standard) -&gt; B(SingleInstance) -&gt; C(Standard)</span><br></pre></td></tr></table></figure>
@@ -567,25 +568,25 @@
 <td>1</td>
 <td align="left">/M&gt;</td>
 <td align="left">退出</td>
-<td align="center">SingleInstance Start A</td>
+<td align="center">Start SingleInstance A</td>
 </tr>
 <tr>
 <td>2</td>
 <td align="left">/M&gt; - /A&gt;</td>
 <td align="left">/M&gt;</td>
-<td align="center">SingleInstance Start B</td>
+<td align="center">Start SingleInstance B</td>
 </tr>
 <tr>
 <td>3</td>
 <td align="left">/M&gt; - /A&gt; - /B&gt;</td>
 <td align="left">/M&gt; - /A&gt;</td>
-<td align="center">SingleInstance Start A</td>
+<td align="center">Start SingleInstance A</td>
 </tr>
 <tr>
 <td>4</td>
 <td align="left">/M&gt; - /B&gt; - /A&gt;</td>
 <td align="left">/M&gt; - /B&gt;</td>
-<td align="center">Standard Start C</td>
+<td align="center">Start Standard C</td>
 </tr>
 <tr>
 <td>5</td>
@@ -1073,14 +1074,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Site Symbols:</span>
-    <span title="Site Symbols">344k</span>
+    <span title="Site Symbols">359k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Site Read Time &asymp;</span>
-    <span title="Site Read Time">6:22</span>
+    <span title="Site Read Time">6:39</span>
   </span>
 </div>
 

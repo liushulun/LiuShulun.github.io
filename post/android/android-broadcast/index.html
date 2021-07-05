@@ -25,7 +25,7 @@
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.luis.ltd&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#EB6D39&quot;,&quot;save&quot;:&quot;manual&quot;},&quot;fancybox&quot;:true,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:true,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:true,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:true,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeInDown&quot;,&quot;post_header&quot;:null,&quot;post_body&quot;:null,&quot;coll_header&quot;:&quot;none&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.json&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="（1）广播的分类（静态和动态 Receiver、全局和本地广播、标准和有序 Broadcast）；（2）广播的限制（耗时任务不应使用子线程、高 API 版本显式和隐式广播）。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android-BroadcastReceiver">
+<meta property="og:title" content="Android-Broadcast">
 <meta property="og:url" content="https://blog.luis.ltd/post/android/android-broadcast/index.html">
 <meta property="og:site_name" content="Luis&#39;s Blogs">
 <meta property="og:description" content="（1）广播的分类（静态和动态 Receiver、全局和本地广播、标准和有序 Broadcast）；（2）广播的限制（耗时任务不应使用子线程、高 API 版本显式和隐式广播）。">
@@ -34,7 +34,8 @@
 <meta property="article:author" content="Luis">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="四大组件">
-<meta property="article:tag" content="BroadcastReceiver">
+<meta property="article:tag" content="Broadcast">
+<meta property="article:tag" content="Receiver">
 <meta name="twitter:card" content="summary">
 
 
@@ -42,10 +43,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.luis.ltd&#x2F;post&#x2F;android&#x2F;android-broadcast&#x2F;&quot;,&quot;path&quot;:&quot;post&#x2F;android&#x2F;android-broadcast&#x2F;&quot;,&quot;title&quot;:&quot;Android-BroadcastReceiver&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;blog.luis.ltd&#x2F;post&#x2F;android&#x2F;android-broadcast&#x2F;&quot;,&quot;path&quot;:&quot;post&#x2F;android&#x2F;android-broadcast&#x2F;&quot;,&quot;title&quot;:&quot;Android-Broadcast&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>Android-BroadcastReceiver | Luis's Blogs</title>
+<title>Android-Broadcast | Luis's Blogs</title>
   
 
 
@@ -78,7 +79,7 @@
       <h1 class="site-title">Luis's Blogs</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">V 1.3.14</p>
+      <p class="site-subtitle" itemprop="description">V 1.3.20</p>
   </div>
 
   <div class="site-nav-right">
@@ -93,9 +94,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">65</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">68</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">115</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">116</span></a></li>
         
             
   <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-comments fa-fw"></i>About</a></li>
@@ -175,7 +176,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">Posts</span>
         </a>
       </div>
@@ -188,7 +189,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">115</span>
+        <span class="site-state-item-count">116</span>
         <span class="site-state-item-name">Tags</span></a>
       </div>
   </nav>
@@ -271,7 +272,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Android-BroadcastReceiver
+          Android-Broadcast
         </h1>
 
         <div class="post-meta-container">
@@ -339,7 +340,8 @@
       <div class="post-tags">
           <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
           <a href="/tags/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> 四大组件</a>
-          <a href="/tags/BroadcastReceiver/" rel="tag"><i class="fa fa-tag"></i> BroadcastReceiver</a>
+          <a href="/tags/Broadcast/" rel="tag"><i class="fa fa-tag"></i> Broadcast</a>
+          <a href="/tags/Receiver/" rel="tag"><i class="fa fa-tag"></i> Receiver</a>
       </div>
   </div>
 ############################################# 注释结束 -->
@@ -349,7 +351,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Post Symbols:</span>
-      <span>6.8k</span>
+      <span>7.1k</span>
     </span>
     <span class="post-meta-item" title="Read Time">
       <span class="post-meta-item-icon">
@@ -387,6 +389,9 @@
 <li>同理，Application 注册的 Receiver，由其他 Activity 反注册也会抛出异常。</li>
 </ul>
 <p>注册和反注册一定要确保成对调用，如果 Activity 注册 Receiver 后未主动销毁，会导致 Activity 退出后无法回收导致内存泄漏。</p>
+<blockquote>
+<p>（@注）动态注册的 Receiver <strong>只能接收「隐式」广播</strong>。</p>
+</blockquote>
 <h3 id="1-2-全局和本地"><a href="#1-2-全局和本地" class="headerlink" title="1.2 全局和本地"></a>1.2 全局和本地</h3><p>全局和本地同时针对 Broadcast 和 BroadcastReceiver，由 Broadcast 发送方式和 Receiver 的注册方式决定。</p>
 <h4 id="1-2-1-全局广播"><a href="#1-2-1-全局广播" class="headerlink" title="1.2.1 全局广播"></a>1.2.1 全局广播</h4><p>全局 Broadcast 可以被任意全局 Receiver 接收，即使 App 并未启动。</p>
 <ul>
@@ -445,9 +450,11 @@
 <p>因为本地广播仅在当前 App 内传播，所以任意 Receiver 都可以接收来自其同一个 App 内部发送的「本地」隐式广播：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过隐式 Intent 发送本地 Broadcast，该 App 内所有对应 ActionName 的 Receiver 都可以收到：</span></span><br><span class="line">localBroadcastManager.sendBroadcast(<span class="keyword">new</span> Intent(<span class="string">&quot;ACTION_DEMO&quot;</span>));</span><br></pre></td></tr></table></figure>
 
-<p>（2）外部 App 发送的隐式 Broadcast 可以被动态 Receiver 接收。</p>
+<p>（2）动态注册的 Receiver 只能接收隐式 Broadcast。</p>
+<p>在 Manifest 中注册的四大组件，App 安装时系统就能明确获取到对应的信息，因此通常跨 App 调用组件时，都需要采用显式调用的方式，系统会根据显示调用的信息搜索已经静态注册的组件。但四大组件中只有 BroadcastReceiver 可以动态注册，而动态注册的 Receiver 是不会被记录在 Manifest 中的，如果向其发送显式广播，系统将无法从已注册的组件信息中搜索到对应的 Receiver，因此动态 Receiver 只能接收隐式 Broadcast。</p>
+<p>（3）外部 App 发送的隐式 Broadcast 可以被动态 Receiver 接收。</p>
 <p>因为 Google 在高 API 版本对隐式 Broadcast 唤起的限制主要时避免 App 偷偷互相拉起，因此对于已经启动的 App，其 Receiver 被唤起并不会影响用户体验。而动态 Receiver 一定是在 App 运行时注册的，因此动态 Receiver 可以接收来自其他 App 发送的隐式广播。</p>
-<p>（3）外部 App 发送的隐式 Broadcast 无法被静态 Receiver 接收。</p>
+<p>（4）外部 App 发送的隐式 Broadcast 无法被静态 Receiver 接收。</p>
 <p>由于静态 Receiver 在 App 未启动时也响应对符合条件的 Broadcast，并且会静默启动 Application，因此静态 Receiver 被禁止接收来自外部 App 发送的全局隐式 Broadcast。向其他 App 的 Receiver 发送全局 Broadcast 时，Receiver 必须指定 <code>exported=&quot;true&quot;</code>，且发送方必须采用显式 Intent 的方式，指定 Receiver 所在 App 的包名和 Receiver 全路径：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        Log.d(<span class="string">&quot;DemoReceiver&quot;</span>, <span class="string">&quot;--- onReceive ---&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收方 App 必须设置 exported=true，permission 可选。</span></span><br><span class="line">&lt;manifest <span class="keyword">package</span>=<span class="string">&quot;priv.luis&quot;</span>&gt;</span><br><span class="line">    &lt;receiver</span><br><span class="line">        android:name=<span class="string">&quot;.DemoReceiver&quot;</span></span><br><span class="line">        android:exported=<span class="string">&quot;true&quot;</span></span><br><span class="line">        /&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送方必须指定 Receiver 所在 App 的包名以及 Receiver 的全路径：</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">&quot;ACTION_DEMO&quot;</span>);</span><br><span class="line">intent.setComponent(<span class="keyword">new</span> ComponentName(<span class="string">&quot;priv.luis&quot;</span>, <span class="string">&quot;priv.luis.DemoReceiver&quot;</span>));</span><br><span class="line">content.sendBroadcast(intent);</span><br></pre></td></tr></table></figure>
 
@@ -583,7 +590,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接:</strong>
-      <a href="https://blog.luis.ltd/post/android/android-broadcast/" title="Android-BroadcastReceiver">https://blog.luis.ltd/post/android/android-broadcast/</a>
+      <a href="https://blog.luis.ltd/post/android/android-broadcast/" title="Android-Broadcast">https://blog.luis.ltd/post/android/android-broadcast/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明: </strong>所有文章均由 Luis 原创，采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议，引用前请务必联系授权。
@@ -594,7 +601,8 @@
           <div class="post-tags">
               <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
               <a href="/tags/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> 四大组件</a>
-              <a href="/tags/BroadcastReceiver/" rel="tag"><i class="fa fa-tag"></i> BroadcastReceiver</a>
+              <a href="/tags/Broadcast/" rel="tag"><i class="fa fa-tag"></i> Broadcast</a>
+              <a href="/tags/Receiver/" rel="tag"><i class="fa fa-tag"></i> Receiver</a>
           </div>
 
         
@@ -641,14 +649,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Site Symbols:</span>
-    <span title="Site Symbols">344k</span>
+    <span title="Site Symbols">359k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Site Read Time &asymp;</span>
-    <span title="Site Read Time">6:22</span>
+    <span title="Site Read Time">6:39</span>
   </span>
 </div>
 
