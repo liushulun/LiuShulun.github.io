@@ -3209,6 +3209,7 @@ body {
 }
 .sidebar-inner {
   background: var(--custom-color-block-background);
+  padding: 18px 0px;
 }
 .site-author-image {
   transition: transform 1s ease-out;
@@ -3358,7 +3359,7 @@ body {
   font-size: 0.8125em;
 }
 .post-toc ol {
-  padding: 0px 2px 0px 5px;
+  padding: 0px 2px 0px 2px;
 }
 .post-toc .nav .nav-child {
   padding-left: 15px;
@@ -3373,9 +3374,6 @@ body {
   word-break: normal;
   white-space: normal;
   text-align: center;
-}
-.post-toc .nav .nav-level-2 {
-  margin-left: -15px;
 }
 .post-tags {
   margin-top: 0px;
