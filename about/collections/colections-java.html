@@ -23,12 +23,12 @@
   <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;blog.luis.ltd&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#EB6D39&quot;,&quot;save&quot;:&quot;manual&quot;},&quot;fancybox&quot;:true,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:true,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:true,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:true,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeInDown&quot;,&quot;post_header&quot;:null,&quot;post_body&quot;:null,&quot;coll_header&quot;:&quot;none&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;},&quot;path&quot;:&quot;&#x2F;search.json&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Spring Boot 到底是怎么运行的  Spring Boot(一)：入门篇  Java中一个令人惊讶的bug  JVM 面试 4 连炮，你能顶得住么？  匿名内部类的这几个骚操作，99% 的人都不知道！  掌握 HashMap 看这一篇文章就够了  面试官：你说 HashMap 线程不安全，它为啥不安全呢？  讲述 ConcurrentHashMap 线程安全最牛逼的一篇文章，没有之一！">
+<meta name="description" content="Spring Boot 到底是怎么运行的 Spring Boot(一)：入门篇 Java中一个令人惊讶的bug JVM 面试 4 连炮，你能顶得住么？ 匿名内部类的这几个骚操作，99% 的人都不知道！ 掌握 HashMap 看这一篇文章就够了 面试官：你说 HashMap 线程不安全，它为啥不安全呢？ 讲述 ConcurrentHashMap 线程安全最牛逼的一篇文章，没有之一！ 灵魂拷问：为什">
 <meta property="og:type" content="website">
 <meta property="og:title" content="收藏-Java">
 <meta property="og:url" content="https://blog.luis.ltd/about/collections/colections-java.html">
 <meta property="og:site_name" content="Luis&#39;s Blogs">
-<meta property="og:description" content="Spring Boot 到底是怎么运行的  Spring Boot(一)：入门篇  Java中一个令人惊讶的bug  JVM 面试 4 连炮，你能顶得住么？  匿名内部类的这几个骚操作，99% 的人都不知道！  掌握 HashMap 看这一篇文章就够了  面试官：你说 HashMap 线程不安全，它为啥不安全呢？  讲述 ConcurrentHashMap 线程安全最牛逼的一篇文章，没有之一！">
+<meta property="og:description" content="Spring Boot 到底是怎么运行的 Spring Boot(一)：入门篇 Java中一个令人惊讶的bug JVM 面试 4 连炮，你能顶得住么？ 匿名内部类的这几个骚操作，99% 的人都不知道！ 掌握 HashMap 看这一篇文章就够了 面试官：你说 HashMap 线程不安全，它为啥不安全呢？ 讲述 ConcurrentHashMap 线程安全最牛逼的一篇文章，没有之一！ 灵魂拷问：为什">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-12-31T16:00:00.000Z">
 <meta property="article:author" content="Luis">
@@ -77,7 +77,7 @@
       <h1 class="site-title">Luis's Blogs</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">V 1.3.21</p>
+      <p class="site-subtitle" itemprop="description">V 1.3.22</p>
   </div>
 
   <div class="site-nav-right">
@@ -270,12 +270,6 @@
           
             
                 
-  <li class="menu-item menu-item-records"><a href="/about/records/" rel="section"><i class="fa fa-list-alt fa-fw"></i>Records</a></li>
-
-
-          
-            
-                
   <li class="menu-item menu-item-plans"><a href="/about/plans/" rel="section"><i class="fas fa-blog fa-fw"></i>Plans</a></li>
 
 
@@ -318,9 +312,6 @@
 
                 
                 
-
-                
-                
         
       
   
@@ -349,72 +340,39 @@
       
       <div class="post-body">
           <ul>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/4yQZszewKsAARAUO6-K-og" title="@LINK">Spring Boot 到底是怎么运行的</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/6PB2avQt8Vo9AeIttYvUpQ" title="@LINK">Spring Boot(一)：入门篇</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/jsycP-heFLGBBGwV5CrpAA" title="@LINK">Java中一个令人惊讶的bug</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/iDqCO0Fa9tXAjGEnviQuMw" title="@LINK">JVM 面试 4 连炮，你能顶得住么？</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/qIpwEjRd2rYEze6KzC6o6Q" title="@LINK">匿名内部类的这几个骚操作，99% 的人都不知道！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/SuOAv2U5eosuaEfm37EtRA" title="@LINK">掌握 HashMap 看这一篇文章就够了</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/yxn47A4UcsrORoDJyREEuQ" title="@LINK">面试官：你说 HashMap 线程不安全，它为啥不安全呢？</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/B1XboYOpGfnIOtCUvmOSmA" title="@LINK">讲述 ConcurrentHashMap 线程安全最牛逼的一篇文章，没有之一！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/5UuyitvhXv3zEDnE9H_vLw" title="@LINK">灵魂拷问：为什么 Java 字符串是不可变的？</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/YnxNCTBBogOnrV813rgXvQ" title="@LINK">想深入了解线程池底层原理？那就手写一个吧！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/kc8jT3QfuBjVdxr8n6z8tA" title="@LINK">ArrayList 插入1000万条数据之后，我怀疑了jvm…</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/e4NLN-Q7XBfZ-eGCNBxT3A" title="@LINK">一个有趣的实验：用0.1f 替换 0，性能提升 7 倍！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/JaIJwuXnV0YCb1PwdXCMXg" title="@LINK">Java：控制反转（IoC）与依赖注入（DI）</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/i2E7PmBStA-4nLlbC9Enrw" title="@LINK">记一次隐藏很深的 JVM 线上惨案的分析、排查、解决！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Ad84gT8fGgCBvSzsS8bNFg" title="@LINK">项目里使用 Java 集合时，应该避免的一些坑！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7gbJCeBKklTlAxU_vsrIxg" title="@LINK">阿里一面：关于【缓存穿透、缓存击穿、缓存雪崩、热点数据失效】问题的解决方案</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/AdmEd1FHxpZUwSGYy3qggg" title="@LINK">【底层原理】利用cpu缓存实现高性能程序</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/aHGjQ4wzKi5Bx4fR4peScA" title="@LINK">求你了，别再说Java对象都是在堆内存上分配空间的了！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/9rYhlsGiWwvhg6aD8NIWEQ" title="@LINK">搞定 JVM 垃圾回收就是这么简单</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/RPNj5Xo4K_RZIm6V2gZWlQ" title="@LINK">【纯干货】Java 并发进阶常见面试题总结</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/20t_UtNNwXfynbzxpi7p2Q" title="@LINK">从源码角度，看 Java 是如何实现自己的 SPI 机制的？</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ZmjKVu4hmWuEB-cofCbJSQ" title="@LINK">不使用synchronized和lock，如何实现一个线程安全的单例？</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0zuayo-EFQGFHhUGyGrYZw" title="@LINK">再有人问你什么是ThreadLocal，就把这篇文章甩给他！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/SysYihctu03RlUtI0pcG7w" title="@LINK">面试官再问你 ThreadLocal，就这样狠狠 “怼” 回去！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xxFr8vb5dgWA-ifgidWwKg" title="@LINK">单例的线程安全及序列化问题</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/2R3MvwNLmMpsc9JKLbHx-w" title="@LINK">干掉 try catch ！</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/8rhgKltfYaUVHCkLm0fquQ" title="@LINK">如何解决代码中if…else 过多的问题</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/saD0Sd7DYDlyqgkjofPH2Q" title="@LINK">一起来扒扒 System.currentTimeMillis() 的潜在性能问题！你敢信？</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Q1BUuQbxhnp4V9d8-8XscQ" title="@LINK">看完这篇 Session、Cookie、Token，和面试官扯皮就没问题了</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/HLqNLH1RnnJO1RD6FalnNg" title="@LINK">耐人寻味的 8 幅Java技术图</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/iq0xgtWdVEuJH8PXn_u6qg" title="@LINK">从原理上搞懂如何设置线程池参数大小？</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/mbcwt-EydKP7hqocXad82g" title="@LINK">手把手教你定位常见Java性能问题</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/e8GhmEQ_RJbA7Dc03PZi8Q" title="@LINK">面试被问了几百遍的 IoC 和 AOP ，还在傻傻搞不清楚？</a></p>
-</li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/4yQZszewKsAARAUO6-K-og" title="@LINK">Spring Boot 到底是怎么运行的</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/6PB2avQt8Vo9AeIttYvUpQ" title="@LINK">Spring Boot(一)：入门篇</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/jsycP-heFLGBBGwV5CrpAA" title="@LINK">Java中一个令人惊讶的bug</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/iDqCO0Fa9tXAjGEnviQuMw" title="@LINK">JVM 面试 4 连炮，你能顶得住么？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/qIpwEjRd2rYEze6KzC6o6Q" title="@LINK">匿名内部类的这几个骚操作，99% 的人都不知道！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/SuOAv2U5eosuaEfm37EtRA" title="@LINK">掌握 HashMap 看这一篇文章就够了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/yxn47A4UcsrORoDJyREEuQ" title="@LINK">面试官：你说 HashMap 线程不安全，它为啥不安全呢？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/B1XboYOpGfnIOtCUvmOSmA" title="@LINK">讲述 ConcurrentHashMap 线程安全最牛逼的一篇文章，没有之一！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/5UuyitvhXv3zEDnE9H_vLw" title="@LINK">灵魂拷问：为什么 Java 字符串是不可变的？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/YnxNCTBBogOnrV813rgXvQ" title="@LINK">想深入了解线程池底层原理？那就手写一个吧！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/kc8jT3QfuBjVdxr8n6z8tA" title="@LINK">ArrayList 插入1000万条数据之后，我怀疑了jvm…</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/e4NLN-Q7XBfZ-eGCNBxT3A" title="@LINK">一个有趣的实验：用0.1f 替换 0，性能提升 7 倍！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/JaIJwuXnV0YCb1PwdXCMXg" title="@LINK">Java：控制反转（IoC）与依赖注入（DI）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/i2E7PmBStA-4nLlbC9Enrw" title="@LINK">记一次隐藏很深的 JVM 线上惨案的分析、排查、解决！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Ad84gT8fGgCBvSzsS8bNFg" title="@LINK">项目里使用 Java 集合时，应该避免的一些坑！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7gbJCeBKklTlAxU_vsrIxg" title="@LINK">阿里一面：关于【缓存穿透、缓存击穿、缓存雪崩、热点数据失效】问题的解决方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/AdmEd1FHxpZUwSGYy3qggg" title="@LINK">【底层原理】利用cpu缓存实现高性能程序</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/aHGjQ4wzKi5Bx4fR4peScA" title="@LINK">求你了，别再说Java对象都是在堆内存上分配空间的了！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/9rYhlsGiWwvhg6aD8NIWEQ" title="@LINK">搞定 JVM 垃圾回收就是这么简单</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/RPNj5Xo4K_RZIm6V2gZWlQ" title="@LINK">【纯干货】Java 并发进阶常见面试题总结</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/20t_UtNNwXfynbzxpi7p2Q" title="@LINK">从源码角度，看 Java 是如何实现自己的 SPI 机制的？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ZmjKVu4hmWuEB-cofCbJSQ" title="@LINK">不使用synchronized和lock，如何实现一个线程安全的单例？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0zuayo-EFQGFHhUGyGrYZw" title="@LINK">再有人问你什么是ThreadLocal，就把这篇文章甩给他！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/SysYihctu03RlUtI0pcG7w" title="@LINK">面试官再问你 ThreadLocal，就这样狠狠 “怼” 回去！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/xxFr8vb5dgWA-ifgidWwKg" title="@LINK">单例的线程安全及序列化问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/2R3MvwNLmMpsc9JKLbHx-w" title="@LINK">干掉 try catch ！</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/8rhgKltfYaUVHCkLm0fquQ" title="@LINK">如何解决代码中if…else 过多的问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/saD0Sd7DYDlyqgkjofPH2Q" title="@LINK">一起来扒扒 System.currentTimeMillis() 的潜在性能问题！你敢信？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Q1BUuQbxhnp4V9d8-8XscQ" title="@LINK">看完这篇 Session、Cookie、Token，和面试官扯皮就没问题了</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/HLqNLH1RnnJO1RD6FalnNg" title="@LINK">耐人寻味的 8 幅Java技术图</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/iq0xgtWdVEuJH8PXn_u6qg" title="@LINK">从原理上搞懂如何设置线程池参数大小？</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/mbcwt-EydKP7hqocXad82g" title="@LINK">手把手教你定位常见Java性能问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/e8GhmEQ_RJbA7Dc03PZi8Q" title="@LINK">面试被问了几百遍的 IoC 和 AOP ，还在傻傻搞不清楚？</a></li>
 </ul>
 
       </div>
