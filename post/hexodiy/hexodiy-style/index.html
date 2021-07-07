@@ -81,7 +81,7 @@
       <h1 class="site-title">Luis's Blogs</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">V 1.3.23</p>
+      <p class="site-subtitle" itemprop="description">V 1.3.26</p>
   </div>
 
   <div class="site-nav-right">
@@ -393,7 +393,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&#123;# 可写进 js 文件中并放在【hexo/source/xxx/】目录下或【next/source/xxx/】目录下 #&#125;</span><br><span class="line">&#123;# 然后通过：&lt;script type=&quot;text/javascript&quot; src=&quot;/xxx/*.js&quot;&gt;&lt;/script&gt; 方式调用 #&#125;</span><br><span class="line">&#123;# 但目录不能以下划线开头（会视为隐藏文件夹而无法访问） #&#125;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    &lt;!--动态浏览器标签--&gt;</span><br><span class="line">    <span class="keyword">var</span> OriginTitle = <span class="built_in">document</span>.title;</span><br><span class="line">    <span class="keyword">var</span> titleTime;</span><br><span class="line">    <span class="keyword">var</span> titleTime2;</span><br><span class="line">    <span class="keyword">var</span> titleTime3;</span><br><span class="line">    <span class="keyword">var</span> blankTitle = <span class="string">&quot;\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000\u3000&quot;</span></span><br><span class="line">    blankTitle = blankTitle + blankTitle + blankTitle;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">&#x27;visibilitychange&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">document</span>.hidden) &#123;</span><br><span class="line">            $(<span class="string">&#x27;[rel=&quot;icon&quot;]&#x27;</span>).attr(<span class="string">&#x27;href&#x27;</span>, <span class="string">&quot;/images/favicon-32x32-next.png&quot;</span>);</span><br><span class="line">            <span class="comment">// 失去焦点时不切换标题</span></span><br><span class="line">            <span class="comment">// document.title = &quot;Waiting...&quot;;</span></span><br><span class="line">            <span class="built_in">document</span>.title = OriginTitle;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(titleTime);</span><br><span class="line">            <span class="built_in">clearTimeout</span>(titleTime2);</span><br><span class="line">            <span class="built_in">clearTimeout</span>(titleTime3);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">document</span>.title = <span class="string">&quot;Welcome&quot;</span>;</span><br><span class="line">            titleTime = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="built_in">document</span>.title = <span class="string">&quot;Back&quot;</span>;</span><br><span class="line">                titleTime2 = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                    <span class="built_in">document</span>.title = <span class="string">&quot;Welcome Back !&quot;</span>;</span><br><span class="line">                    titleTime3 = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                        <span class="built_in">document</span>.title = OriginTitle;</span><br><span class="line">                    &#125;, <span class="number">500</span>);</span><br><span class="line">                &#125;, <span class="number">300</span>);</span><br><span class="line">            &#125;, <span class="number">300</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>（@注）具体的文件名和路径请按照实际情况修改。其实这种三个定时器的嵌套比较 Low，不知道有没有办法可以重用定时器。</p>
+<p>具体的文件名和路径请按照实际情况修改。其实这种三个定时器的嵌套比较 Low，不知道有没有办法可以重用定时器。</p>
 <p><code>icon</code> 处可以自定义一个小图像，可以是本地图像也可以是网络图片。不过需要注意的是，这里如果选择本地图片，“/”表示的就不是博客根目录而是主题根目录，所以 <code>/images/</code> 其实等价于 <code>/next/images/</code>。同理，在主题配置文件中的 <code>favicon</code> 选项设置的也是浏览器标签页小图标，指定的路径也是以主题根目录为起始路径的。</p>
 </blockquote>
 <hr>
@@ -589,14 +589,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Site Symbols:</span>
-    <span title="Site Symbols">358k</span>
+    <span title="Site Symbols">357k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Site Read Time &asymp;</span>
-    <span title="Site Read Time">6:38</span>
+    <span title="Site Read Time">6:37</span>
   </span>
 </div>
 

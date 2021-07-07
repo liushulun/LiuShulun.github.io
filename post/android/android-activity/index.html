@@ -30,6 +30,7 @@
 <meta property="og:site_name" content="Luis&#39;s Blogs">
 <meta property="og:description" content="（1）Activity 简介（Activity 的生命周期、Activity 的启动与退出）；（2）Activity 的启动模式（Standard、SingleTop、SingleTask、SingleInstance）；（3）Activity 启动流程（Application 启动流程、onCreate、onStart、onResume）；（4）Activity 布局加载流程（setConten">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://blog.luis.ltd/post/android/android-activity/activity_lifecycle.svg">
 <meta property="article:published_time" content="2021-06-06T13:42:31.000Z">
 <meta property="article:author" content="Luis">
 <meta property="article:tag" content="Android">
@@ -40,6 +41,7 @@
 <meta property="article:tag" content="生命周期">
 <meta property="article:tag" content="启动流程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.luis.ltd/post/android/android-activity/activity_lifecycle.svg">
 
 
 <link rel="canonical" href="https://blog.luis.ltd/post/android/android-activity/">
@@ -82,7 +84,7 @@
       <h1 class="site-title">Luis's Blogs</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">V 1.3.23</p>
+      <p class="site-subtitle" itemprop="description">V 1.3.26</p>
   </div>
 
   <div class="site-nav-right">
@@ -364,7 +366,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Read Time &asymp;</span>
-      <span>58 Min</span>
+      <span>57 Min</span>
     </span>
 </div>
 
@@ -379,29 +381,30 @@
         <span id="more"></span>
 
 <h1 id="Android-Activity深入理解"><a href="#Android-Activity深入理解" class="headerlink" title="Android-Activity深入理解"></a>Android-Activity深入理解</h1><h2 id="1-Activity简介"><a href="#1-Activity简介" class="headerlink" title="1. Activity简介"></a>1. Activity简介</h2><h3 id="1-1-Activity生命周期"><a href="#1-1-Activity生命周期" class="headerlink" title="1.1 Activity生命周期"></a>1.1 Activity生命周期</h3><p>Activity 即一个用户界面，可以理解成一个视图容器，容器内可以包裹和展示各类控件。全部 Activity 都需要在 Manifest 内声明。Activity 的生命周期为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">onCreate()</span><br><span class="line">onStart()</span><br><span class="line">onResume()</span><br><span class="line">onPause()</span><br><span class="line">onStop()</span><br><span class="line">onDestroy() 或 onRestart() - onStart()</span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是：<code>onStop()</code> 在 Activity 不可见时才调用，例如 AActivity 启动 BActivity，若 BActivity 是透明或弹窗形式（<code>android:theme=&quot;@android:style/Theme.Dialog&quot;</code>），则 AActiivty 不会调用 <code>onStop()</code>。</p>
-<p>Activity 的 <code>onSaveInstanceState()</code> 和 <code>onRestoreInstanceState()</code> 并不是生命周期方法。当用户按 Home 键返回桌面、从多任务切换应用、锁屏、屏幕方向变化、启动新的 Activity时，或者当应用遇到意外情况（如内存不足）且 Activity 由系统销毁时，则 <code>onSaveInstanceState()</code> 会被调用。但是当用户主动销毁一个 Activity（例如在应用中按返回键）时，<code>onSaveInstanceState()</code> 就不会被调用。通常 <code>onSaveInstanceState()</code> 只适合用于保存一些临时性的状态，而 <code>onPause()</code> 适合用于数据的持久化保存。</p>
-<p>如果一个 Activity 被打开过，然后被置入任务栈顶端（例如切换到另一个 Activity 且没有再次切换新 Activity），且此时处于 <code>onPause()</code>、<code>onStop</code> 状态，则当有一个 Intent 启动该 Activity，会先调用 <code>onNewIntent()</code>，然后才调用 <code>onRestart()</code> - <code>onStart()</code> - <code>onResume()</code>。</p>
+<p><img data-src="./activity_lifecycle.svg" alt="Activity 生命周期" title="@ASSET"></p>
+<p>需要注意的是：</p>
+<ul>
+<li><code>onStop()</code> 在 Activity 不可见时才调用，例如 AActivity 启动 BActivity，若 BActivity 是透明或弹窗形式（<code>android:theme=&quot;@android:style/Theme.Dialog&quot;</code>），则 AActiivty 不会调用 <code>onStop()</code>。</li>
+<li>Activity 的 <code>onSaveInstanceState()</code> 和 <code>onRestoreInstanceState()</code> 并不是生命周期方法，当 Activity 处于 <code>isFinishing()</code> 状态时，<code>onSaveInstanceState()</code> 就不会被调用，因此只适合用于保存一些临时性的状态。</li>
+</ul>
 <h3 id="1-2-启动Activity"><a href="#1-2-启动Activity" class="headerlink" title="1.2 启动Activity"></a>1.2 启动Activity</h3><p>假设有一个 DemoActivity 注册信息如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">    android:name=&quot;demo.DemoActivity&quot;</span><br><span class="line">    android:exported=&quot;false&quot;</span><br><span class="line">    android:excludeFromRecents=&quot;false&quot;</span><br><span class="line">    &gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;demo.customActionName&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.DEFAULT&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<ul>
+<li><code>exported</code>: 是否对外部 App 可见，默认为 <code>false</code>。隐式启动 Activity 时搜索 ActionName 的范围是当前 App 内，如果允许被其他 App 启动，则需要设置为 <code>true</code>。</li>
+<li><code>excludeFromRecents</code>: 是否在 Activity 进入后台时立即从「最近任务」中移除记录，默认为 <code>false</code>。如果设置为 `true，则该 Activity 一旦进入后台，就会从「最近任务」中删除其记录，不论该 Activity 是否是最后一个或唯一一个活跃的 Activity。</li>
+</ul>
 <p>（1）显式启动 Actiivty：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(context, DemoActivity.class);</span><br><span class="line"><span class="comment">// 直接插入数据</span></span><br><span class="line">intent.putExtra(<span class="string">&quot;key&quot;</span>, value)</span><br><span class="line"><span class="comment">// 通过 Bundle</span></span><br><span class="line">Bundle bundle = <span class="keyword">new</span> Bundle();</span><br><span class="line">bundle.putXXX(String key, XXX value);</span><br><span class="line">intent.putExtra(bundle);</span><br><span class="line"></span><br><span class="line">context.startActivity(intent);</span><br></pre></td></tr></table></figure>
 
 <p>（2）隐式启动 Activity：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">intent.setAction(<span class="string">&quot;demo.customActionName&quot;</span>);</span><br><span class="line">context.startActivity(intent)</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>（@注）默认情况下，隐式启动 Activity 时搜索 ActionName 的范围是当前 App 内，如果需要被其他 App 启动，则需要添加 <code>exported = true</code> 属性，该属性默认为 false。</p>
-<p>（@注）如果添加了 <code>excludeFromRecents = true</code> 属性，则该 Activity 一旦进入后台，就会从「最近任务」中删除其记录，不论该 Activity 是否是最后一个或唯一一个活跃的 Activity。</p>
-</blockquote>
 <p>（3）<code>startActivity()</code> 是 Context 中的方法，因此 Activity 或 Application 都可以调用。但如果使用 <code>Application.startActivity()</code> 则需要给 Intent 添加一个 Flag <code>FLAG_ACTIVITY_NEW_TASK</code>，否则会报错：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.util.AndroidRuntimeException: Calling startActivity from outside of an Activity context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>（@注）Activity、Application 都是 Context 抽象类的子类，而 ContextImpl 是 Context 的实现。ActivityThread 在 <code>main()</code> 方法中实例化一个 ComtextImpl 并与 Activity 绑定。</p>
+<p>Activity、Application 都是 Context 抽象类的子类，而 ContextImpl 是 Context 的实现。ActivityThread 在 <code>main()</code> 方法中实例化一个 ComtextImpl 并与 Activity 绑定。</p>
 </blockquote>
 <h3 id="1-3-退出Activity"><a href="#1-3-退出Activity" class="headerlink" title="1.3 退出Activity"></a>1.3 退出Activity</h3><p>Activity 可以通过调用 <code>finish()</code> 退出。当 App 正在退出时，<code>isFinishing() == true</code>，可用于在 <code>onPause()</code> 或 <code>onStop()</code> 中判断该 Activity 是正在退出或只是进入后台。</p>
 <p>同时退出多个 Activity 的方法：</p>
@@ -420,10 +423,9 @@
 <li><code>singleInstance</code></li>
 </ul>
 <p>需要先了解到，Android 中 Activity 是存在任务栈 Task 中的，启动一个 Activity 时会将其压栈，销毁时弹出，不同启动模式会导致 Activity 任务栈产生不同的行为，且一个 App 进程可以拥有多个 Activity 任务栈。</p>
-<p>Activity 可以通过在 Manifest 中指定 <code>taskAffinity</code> 来指定其 <strong>倾向</strong> 加入的任务栈，但只有在满足条件时才会添加到该指定任务栈中。</p>
+<p>Activity 可以通过在 Manifest 中指定 <code>taskAffinity</code> 来指定其 <strong>倾向于</strong> 加入的任务栈，但只有在满足条件时才会添加到该指定任务栈中。Activity 在启动时会先查找是否存在指定的栈，假如存在则会 <strong>「优先尝试」</strong> 压入对应栈，否则才会新建一个栈并启动。如果 Activity 没有指定，则默认等同于 Application 的 taskAffinity，如果 Application 也没有指定，则默认等同于包名。</p>
 <blockquote>
-<p>（@注）<code>taskAffinity</code> 属性代表了一种「倾向」，表示一个 Activity <strong>「倾向于」</strong> 放在哪个栈中。Activity 启动时会先查找是否存在指定的栈，假如存在则会 <strong>「优先尝试」</strong> 压入对应栈，否则才会新建一个栈并启动。如果 Activity 没有指定，则默认等同于 Application 的 taskAffinity，如果 Application 也没有指定，则默认等同于包名。</p>
-<p>但 taskAffinity 并非 100% 生效。singleInstance 模式启动 Activity 时，其栈内仅允许存在该 Activity；即使其他 Activity 指定同一个 taskAffinity，依然会启动到新的栈中，但这两个栈的 taskAffinity 名称相同；所以判断栈是否相同仍然只能通过 TaskID，而不是 taskAffinity。</p>
+<p><code>taskAffinity</code> 并非 100% 生效。例如 singleInstance 模式启动 Activity 时，其栈内仅允许存在该 Activity；即使其他 Activity 指定同一个 taskAffinity，依然会启动到新的栈中，但这两个栈的 taskAffinity 名称相同；所以判断栈是否相同仍然只能通过 TaskID，而不是 taskAffinity。</p>
 </blockquote>
 <h3 id="2-1-Standard"><a href="#2-1-Standard" class="headerlink" title="2.1 Standard"></a>2.1 Standard</h3><p>（1）Standard 即标准默认模式。启动一个 Activity 时，不论 Activity 在任务栈中是否已经有实例，都新建一个实例并压入任务栈。当前 Activity 在当前任务栈可以有多个实例，每个实例也可以在不同任务栈。</p>
 <p>Standard 启动方式任务栈的行为实例如下（其中 <code>/</code> 表示 <strong>栈底</strong>，<code>&gt;</code> 表示 <strong>栈顶</strong>）：</p>
@@ -613,7 +615,7 @@
 <td align="center">-</td>
 </tr>
 </tbody></table>
-<p>前 3 步都比较好理解，反正就是整个 App 所有任务栈都只允许有一个实例。重点在从第 4 步开始，由于最开始的 M 是 Standard 模式启动的，而第 4 步中 C 也是 Standard 模式，也就导致本来在最底下的任务栈 <code>/M&gt;</code> 被移到了 “任务栈的总栈” 的栈顶，并将 C 压入了 <code>/M&gt;</code> 所在的这个栈顶，因此从 C 返回的时候会先返回到 M，然后才是按顺序下来的 A → B。</p>
+<p>前 3 步都比较好理解，反正就是整个 App 所有任务栈都只允许有一个实例。重点在从第 4 步开始，由于最开始的 M 是 Standard 模式启动的，而第 4 步中 C 也是 Standard 模式，也就导致本来在最底下的任务栈 <code>/M&gt;</code> 处于最上层任务栈，并将 C 压入了 <code>/M&gt;</code> 所在的这个栈顶，因此从 C 返回的时候会先返回到 M。</p>
 <p>（2）SingleInstance 通常用于某些可被共享唤起的 App，但这些 App 仅有部分页面需要被共享唤起。</p>
 <p>例如：</p>
 <ul>
@@ -637,9 +639,6 @@
 <li>子进程在 <code>Process#start()</code> 中通过反射调用 <code>ActivityThread.main()</code>。</li>
 </ul>
 <p>Android 提供了一系列封装和抽象使得 App 无需关注统一的流程。ActivityThread 在 <code>main()</code> 方法中做了一些初始化，包括初始化操作系统、用户环境、进程信息等，以及最重要的启动主线程 Looper。由于每个 App 的启动都复用了 ActivityThread 的逻辑，因此需要一个包装件用于记录当前需要处理的信息，这个包装件就是 ActivityThread 中的内部类 <code>ActivityClientRecord</code>。源码注释也解释的比较清楚了，ActivityClientRecord 其实是一个容器，它持有了一个 Activity，以及管理这个 Activity 相关的其他资源。ActivityClientRecord 和其持有的 Activity 是一一对应的，系统在调度和管理 Activity 时，大多都是通过 ActivityClientRecord 操作 Activity。</p>
-<blockquote>
-<p>（@注）可以形象的理解为：Activity 就像一个主机，Window 就像显示器，同时还有鼠标、键盘、电源等等，所有这些东西加起来，就能作为完整的计算机使用。然后用一个箱子把所有这些都装起来，这个箱子就是 ActivityClientRecord。</p>
-</blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityThread</span> <span class="keyword">extends</span> <span class="title">ClientTransactionHandler</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** Activity client record, used for bookkeeping for the real &#123;<span class="doctag">@link</span> Activity&#125; instance. */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityClientRecord</span> </span>&#123;</span><br><span class="line">        ......</span><br><span class="line">        Activity activity;</span><br><span class="line">        Window window;</span><br><span class="line">        Activity parent;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ......</span><br><span class="line">        Looper.prepareMainLooper();</span><br><span class="line">        ......</span><br><span class="line">        ActivityThread thread = <span class="keyword">new</span> ActivityThread();</span><br><span class="line">        thread.attach(<span class="keyword">false</span>, startSeq);</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="3-1-Application初始化"><a href="#3-1-Application初始化" class="headerlink" title="3.1 Application初始化"></a>3.1 Application初始化</h3><p>启动一个 Activity 的入口，在 API 29 开始与之前版本有不同。在 API 29 之前的版本，ActivityThread 内部持有的一个 Handler 对象 <code>H</code> 监听了 <code>LAUNCH_ACTIVITY</code> 事件，并在收到 <code>LAUNCH_ACTIVITY</code> 请求后会调用 <code>handleLaunchActivity(...)</code>：</p>
@@ -860,7 +859,7 @@
 <p>这个 contentParent，它是从 subDecor 加载后的布局中，通过 <code>findViewById(...)</code> 的方式获取到的一个 ViewGroup，也就是说，实际上在 Activity 中调用的 <code>setContentView(int resId)</code> 传入的布局文件，是加载在 subDecor 的一个子 View 中。</p>
 <p>在 <code>createSubDecor()</code> 中，先确保 Window 和 DecorView 已创建，然后根据 Title 和 ActionBar 的样式不同，通过 <code>inflate</code> 的方式加载对应的模板 subDecor。</p>
 <blockquote>
-<p>（@注）如果 Activity 含有 WindowTitle，且具有 ActionBar，还会从 subDecor 的模板布局中通过 <code>findViewById(int)</code> 的方式获取一个叫 mDecorContentParent 的 ActionBarOverlayLayout 类型的 View，从类名也能看出这个 View 就是专门负责 ActionBar 的。</p>
+<p>如果 Activity 含有 WindowTitle，且具有 ActionBar，还会从 subDecor 的模板布局中通过 <code>findViewById(int)</code> 的方式获取一个叫 mDecorContentParent 的 ActionBarOverlayLayout 类型的 View，从类名也能看出这个 View 就是专门负责 ActionBar 的。</p>
 </blockquote>
 <p>当 subDecor 被成功创建后，通过 <code>mWindow.setContentView(subDecor);</code> 把 subDecor 加载到 Activity 的 Window 中：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneWindow</span> <span class="keyword">extends</span> <span class="title">Window</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 传入的参数 View 就是 subDecor</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContentView</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 这里也可以看出，默认情况下是全屏的</span></span><br><span class="line">        setContentView(view, <span class="keyword">new</span> ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 传入的参数 View 就是 subDecor</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContentView</span><span class="params">(View view, ViewGroup.LayoutParams params)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Note: FEATURE_CONTENT_TRANSITIONS may be set in the process of installing the window</span></span><br><span class="line">        <span class="comment">// decor, when theme attributes and the like are crystalized. Do not check the feature</span></span><br><span class="line">        <span class="comment">// before this happens.</span></span><br><span class="line">        <span class="keyword">if</span> (mContentParent == <span class="keyword">null</span>) &#123;</span><br><span class="line">            installDecor();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!hasFeature(FEATURE_CONTENT_TRANSITIONS)) &#123;</span><br><span class="line">            mContentParent.removeAllViews();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (hasFeature(FEATURE_CONTENT_TRANSITIONS)) &#123;</span><br><span class="line">            view.setLayoutParams(params);</span><br><span class="line">            <span class="keyword">final</span> Scene newScene = <span class="keyword">new</span> Scene(mContentParent, view);</span><br><span class="line">            transitionTo(newScene);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 传入的参数 View 就是 subDecor</span></span><br><span class="line">            mContentParent.addView(view, params);</span><br><span class="line">        &#125;</span><br><span class="line">        mContentParent.requestApplyInsets();</span><br><span class="line">        <span class="keyword">final</span> Callback cb = getCallback();</span><br><span class="line">        <span class="keyword">if</span> (cb != <span class="keyword">null</span> &amp;&amp; !isDestroyed()) &#123;</span><br><span class="line">            cb.onContentChanged();</span><br><span class="line">        &#125;</span><br><span class="line">        mContentParentExplicitlySet = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">installDecor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ......</span><br><span class="line">        <span class="keyword">if</span> (mContentParent == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// mContentParent 其实就是 DecorView 加载出来之后的布局容器 ViewGroup</span></span><br><span class="line">            mContentParent = generateLayout(mDecor);</span><br><span class="line">        &#125;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1074,14 +1073,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Site Symbols:</span>
-    <span title="Site Symbols">358k</span>
+    <span title="Site Symbols">357k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Site Read Time &asymp;</span>
-    <span title="Site Read Time">6:38</span>
+    <span title="Site Read Time">6:37</span>
   </span>
 </div>
 
