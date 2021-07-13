@@ -3438,13 +3438,16 @@ body {
 }
 .post-body h2:before {
   content: '§ ';
-  color: var(--custom-color-theme);
 }
 .post-body h2 {
   margin-bottom: 50px;
 }
 .post-body h3 {
   margin-top: 50px;
+}
+div.post-body strong {
+  color: #eb6d39;
+  font-weight: bold;
 }
 .highlight {
   background: var(--custom-color-background-dark) !important;
