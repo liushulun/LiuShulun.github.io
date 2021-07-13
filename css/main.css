@@ -3180,6 +3180,16 @@ body {
   background: #222;
   border-radius: 10px 10px 0px 0px;
 }
+@media (max-width: 767px) {
+  .site-brand-container {
+    border-radius: 0px 0px 0px 0px;
+  }
+}
+@media (max-width: 991px) {
+  .site-brand-container {
+    border-radius: 0px 0px 0px 0px;
+  }
+}
 .menu .menu-item a,
 .menu .menu-item span.exturl {
   padding: 5px 20px;
